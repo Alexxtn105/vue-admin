@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
-import DashboardItem from "@/pages/dashboard-item.vue";
-import UsersItem  from "@/pages/users-item.vue";
+import DashboardPage from "@/pages/dashboard-page.vue";
+import UsersPage from "@/pages/users-page.vue";
 const routes: Array<RouteRecordRaw> = [
-  {path:'', component:DashboardItem},
-  {path:'/users', component:UsersItem},
+  {path:'', component:DashboardPage},
+  {path:'/users', component:UsersPage},
 ]
 
 //const router=createRouter(routes)

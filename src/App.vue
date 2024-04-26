@@ -1,28 +1,29 @@
 <template>
-  <nav-item/>
+  <nav-component/>
 
   <div class="container-fluid">
     <div class="row">
 
-      <menu-item/>
+      <menu-component/>
 
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <!--Показываем странички с помощью роутера (файл index.ts)-->
         <router-view/>
       </main>
+
     </div>
   </div>
 </template>
 
 <style>
-/*общие установки*/
+/* Установки рабочей области (кроме меню и панели навигации)*/
 body {
-  /*масштаб шрифта (кроме меню и панели навигации)*/
+  /* масштаб шрифта*/
   font-size: 1.0rem;
-  /*цвет фона рабочей области (кроме меню и панели навигации)*/
+  /* цвет фона */
   background-color: #303030;
   /* цвет текста */
-  color: #c0c0c0;
+  color: #fdc900;
 }
 
 .bi {
@@ -82,14 +83,14 @@ body {
 <script>
 
 import {defineComponent} from "vue";
-import NavItem from "@/components/nav-item.vue";
-import MenuItem from "@/components/menu-item.vue";
-// import UsersItem from "@/pages/users-item.vue";
+import NavComponent from "@/components/nav-component.vue";
+import MenuComponent from "@/components/menu-component.vue";
+// import UsersItem from "@/pages/users-page.vue";
 
 export default defineComponent({
   components: {
-    MenuItem,
-    NavItem
+    MenuComponent,
+    NavComponent,
   }
 })
 </script>
