@@ -52,15 +52,15 @@ import axios from 'axios';
 
 export default {
   setup() {
-    const first_name = ref('');
-    const last_name = ref('');
+    const firstName = ref('');
+    const lastName = ref('');
     const email = ref('');
     const password = ref('');
-    const password_confirm = ref('');
+    const passwordConfirm = ref('');
 
     const submit =async () => {
-      // отключаем camelcase в .eslintrc.js ( '@typescript-eslint/camelcase': "off")
-      /*
+     // отключаем camelcase в .eslintrc.js ( '@typescript-eslint/camelcase': "off")
+       /*
           console.log({
 
             // если мы используем их в коде - нужно брать value
@@ -73,28 +73,33 @@ export default {
    */
       // !!!
       // отправляем POST-запрос на сервер по нужному адресу (в бэкенд)
-    const response=await axios.post(
+    //const response=await axios.post(
+      const {data}=await axios.post(
           'http://localhost:3000/api/register',
           {
 
             // если мы используем их в коде - нужно брать value
-            first_name: first_name.value,
-            last_name: last_name.value,
+            // отключаем camelcase в .eslintrc.js ( '@typescript-eslint/camelcase': "off")
+            // эти имена (слева) будут в JSON запроса
+            first_name: firstName.value,
+            last_name: lastName.value,
             email: email.value,
             password: password.value,
-            password_confirm: password_confirm.value,
+            password_confirm: passwordConfirm.value,
           })
 
-      //выводим в консоль
-      console.log(response);
+      //выводим в консоль все
+//      console.log(response);
+      // если выводить в консоль только данные (обратите внимание на {data выше}
+      console.log(data);
 
     }
     return {
-      firstname: first_name,
-      lastname: last_name,
+      firstname: firstName,
+      lastname: lastName,
       email,
       password,
-      passwordConfirm: password_confirm,
+      passwordConfirm: passwordConfirm,
       submit,
     }
 
