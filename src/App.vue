@@ -15,8 +15,14 @@
 </template>
 
 <style>
+/*общие установки*/
 body {
+  /*масштаб шрифта (кроме меню и панели навигации)*/
   font-size: 1.0rem;
+  /*цвет фона рабочей области (кроме меню и панели навигации)*/
+  background-color: #303030;
+  /* цвет текста */
+  color: #c0c0c0;
 }
 
 .bi {
@@ -34,17 +40,21 @@ body {
     position: sticky;
     top: 48px;
   }
+  /* стиль строки поиска (пока отсутствует) */
 
   .navbar-search {
     display: block;
   }
 }
 
+/* стиль неактивного пункта меню */
 .sidebar .nav-link {
   font-size: .875rem;
   font-weight: 500;
+  color: #000000
 }
 
+/* стиль активного пункта меню */
 .sidebar .nav-link.active {
   color: #2470dc;
 }

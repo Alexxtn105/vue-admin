@@ -1,4 +1,3 @@
-
 <template>
   <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
     <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu"
@@ -12,13 +11,15 @@
         <ul class="nav flex-column">
           <li class="nav-item">
             <!--Указываем router-link to / -->
-            <router-link to="/" class="nav-link d-flex align-items-center gap-2 active" >
+            <!--Для подсветки текущего выделенного пункта меню - используем active-class="active" -->
+            <router-link to="/" active-class="active" class="nav-link">
               Dashboard
             </router-link>
           </li>
           <li class="nav-item">
             <!--Указываем router-link to /users -->
-            <router-link to="/users" class="nav-link d-flex align-items-center gap-2 active" href="#">
+            <!--Для подсветки текущего выделенного пункта меню - используем active-class="active" -->
+            <router-link to="/users" active-class="active" class="nav-link">
               Users
             </router-link>
           </li>
