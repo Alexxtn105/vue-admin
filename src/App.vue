@@ -1,18 +1,6 @@
 <template>
-  <nav-component/>
-
-  <div class="container-fluid">
-    <div class="row">
-
-      <menu-component/>
-
-      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <!--Показываем странички с помощью роутера (файл index.ts)-->
-        <router-view/>
-      </main>
-
-    </div>
-  </div>
+  <router-view></router-view>
+<!-- <wrapper-page/>-->
 </template>
 
 <style>
@@ -85,12 +73,14 @@ body {
 import {defineComponent} from "vue";
 import NavComponent from "@/components/nav-component.vue";
 import MenuComponent from "@/components/menu-component.vue";
+import WrapperPage from "@/pages/wrapper-page.vue";
 // import UsersItem from "@/pages/users-page.vue";
 
 export default defineComponent({
   components: {
-    MenuComponent,
-    NavComponent,
+ //   WrapperPage,
+  //  MenuComponent,
+  //  NavComponent,
   }
 }
 )
