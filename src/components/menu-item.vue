@@ -11,10 +11,16 @@
       <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2 active" href="#">
-
+            <!--Указываем router-link to / -->
+            <router-link to="/" class="nav-link d-flex align-items-center gap-2 active" >
               Dashboard
-            </a>
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <!--Указываем router-link to /users -->
+            <router-link to="/users" class="nav-link d-flex align-items-center gap-2 active" href="#">
+              Users
+            </router-link>
           </li>
         </ul>
       </div>
