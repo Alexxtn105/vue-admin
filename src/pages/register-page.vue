@@ -3,7 +3,7 @@
     <!-- Присваиваем атрибуту @submit реакцию на нажатие кнопки "Зарегистрироватьс"-->
     <!-- Чтобы увидеть в консоли введенные величины (для отладки0, нужно использовать атрибут submit.prevent-->
     <!-- Если используется prevent, обычное поведение меняется, не происходит атвоматического обновления формы-->
-    <form @submit="submit">
+    <form @submit.prevent="submit">
       <h1 class="h3 mb-3 fw-normal">Регистрация</h1>
 
       <div class="form-floating">
@@ -47,34 +47,54 @@
 <script lang="ts">
 
 // ОБЯЗАТЕЛЬНО объявляем переменную ref!!!
-import {ref} from 'vue'
+import {ref} from 'vue';
+import axios from 'axios';
 
 export default {
   setup() {
-    const firstname = ref('');
-    const lastname = ref('');
+    const first_name = ref('');
+    const last_name = ref('');
     const email = ref('');
     const password = ref('');
-    const passwordConfirm = ref('');
+    const password_confirm = ref('');
 
-    const submit = () => {
-      console.log({
-        // если мы используем их в коде - нужно брать value
-        // также отключаем camelcase ы .eslintrc.js ( '@typescript-eslint/camelcase': "off")
+    const submit =async () => {
+      // отключаем camelcase в .eslintrc.js ( '@typescript-eslint/camelcase': "off")
+      /*
+          console.log({
 
-        firstname: firstname.value,
-        lastname: lastname.value,
-        email: email.value,
-        password: password.value,
-        passwordConfirm: passwordConfirm.value,
-      })
+            // если мы используем их в коде - нужно брать value
+            first_name: first_name.value,
+            last_name: last_name.value,
+            email: email.value,
+            password: password.value,
+            password_сonfirm: password_confirm.value,
+          })// для корректного вывода в консоли стаим submit.prevent в атрибуте формы
+   */
+      // !!!
+      // отправляем POST-запрос на сервер по нужному адресу (в бэкенд)
+    const response=await axios.post(
+          'http://localhost:3000/api/register',
+          {
+
+            // если мы используем их в коде - нужно брать value
+            first_name: first_name.value,
+            last_name: last_name.value,
+            email: email.value,
+            password: password.value,
+            password_confirm: password_confirm.value,
+          })
+
+      //выводим в консоль
+      console.log(response);
+
     }
     return {
-      firstname,
-      lastname,
+      firstname: first_name,
+      lastname: last_name,
       email,
       password,
-      passwordConfirm,
+      passwordConfirm: password_confirm,
       submit,
     }
 

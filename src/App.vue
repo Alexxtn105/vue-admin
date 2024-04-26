@@ -71,16 +71,9 @@ body {
 <script>
 
 import {defineComponent} from "vue";
-import NavComponent from "@/components/nav-component.vue";
-import MenuComponent from "@/components/menu-component.vue";
-import WrapperPage from "@/pages/wrapper-page.vue";
-// import UsersItem from "@/pages/users-page.vue";
 
 export default defineComponent({
   components: {
- //   WrapperPage,
-  //  MenuComponent,
-  //  NavComponent,
   }
 }
 )
