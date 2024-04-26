@@ -92,5 +92,6 @@ export default defineComponent({
     MenuComponent,
     NavComponent,
   }
-})
+}
+)
 </script>

@@ -1,11 +1,23 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
-
+  <h1>{{ count }}</h1>
+  <input type="number" v-model:="count">
 </template>
 
-<style scoped>
+<script>
 
-</style>
+import {ref} from 'vue'
+
+export default {
+  setup() {
+    let count = ref(0);
+    return {
+      count
+    }
+  }
+}
+</script>
+
+
+
+
+
