@@ -1,8 +1,8 @@
 <template>
   <main class="form-signin w-100 m-auto">
-    <!-- Присваиваем атрибуту @submit реакцию на нажатие кнопки "Зарегистрироватьс"-->
+    <!-- Присваиваем атрибуту @submit реакцию на нажатие кнопки "Зарегистрироваться"-->
     <!-- Чтобы увидеть в консоли введенные величины (для отладки0, нужно использовать атрибут submit.prevent-->
-    <!-- Если используется prevent, обычное поведение меняется, не происходит атвоматического обновления формы-->
+    <!-- Если используется prevent, обычное поведение меняется, не происходит автоматического обновления формы-->
     <form @submit.prevent="submit">
       <h1 class="h3 mb-3 fw-normal">Регистрация</h1>
 
@@ -14,10 +14,10 @@
         <input v-model="lastname" class="form-control" placeholder="Имя">
         <label for="floatingInput">Имя</label>
       </div>
-      <!--      <div class="form-floating">-->
-      <!--        <input type="email" class="form-control" placeholder="name@example.com">-->
-      <!--        <label for="floatingInput">Email address</label>-->
-      <!--      </div>-->
+      <!-- <div class="form-floating">-->
+      <!--   <input type="email" class="form-control" placeholder="name@example.com">-->
+      <!--   <label for="floatingInput">Email address</label>-->
+      <!-- </div>-->
       <div class="form-floating">
         <input v-model="email" type="email" class="form-control" placeholder="name@example.com">
         <label for="floatingInput">Email</label>
@@ -30,13 +30,13 @@
         <input v-model="passwordConfirm" type="password" class="form-control" placeholder="Подтверждение пароля">
         <label for="floatingPassword">Подтверждение пароля</label>
       </div>
-      <!--Галочка "Запомнить меня"-->
-      <!--      <div class="form-check text-start my-3">-->
-      <!--        <input class="form-check-input" type="checkbox" value="remember-me">-->
-      <!--        <label class="form-check-label" for="flexCheckDefault">-->
-      <!--          Запомнить меня-->
-      <!--        </label>-->
-      <!--      </div>-->
+      <!-- Галочка "Запомнить меня"-->
+      <!-- <div class="form-check text-start my-3">-->
+      <!--   <input class="form-check-input" type="checkbox" value="remember-me">-->
+      <!--   <label class="form-check-label" for="flexCheckDefault">-->
+      <!--     Запомнить меня-->
+      <!--   </label>-->
+      <!-- </div>-->
 
       <button class="btn btn-primary w-100 py-2" type="submit">Зарегистрироваться</button>
     </form>
@@ -58,29 +58,28 @@ export default {
     const password = ref('');
     const passwordConfirm = ref('');
 
-    const submit =async () => {
-     // отключаем camelcase в .eslintrc.js ( '@typescript-eslint/camelcase': "off")
-       /*
-          console.log({
+    const submit = async () => {
+      // отключаем camelcase в .eslintrc.js ( '@typescript-eslint/camelcase': "off")
+      // тестовый вывод данных в консоль
+      /*
+         console.log({
 
-            // если мы используем их в коде - нужно брать value
-            first_name: first_name.value,
-            last_name: last_name.value,
-            email: email.value,
-            password: password.value,
-            password_сonfirm: password_confirm.value,
-          })// для корректного вывода в консоли стаим submit.prevent в атрибуте формы
-   */
-      // !!!
-      // отправляем POST-запрос на сервер по нужному адресу (в бэкенд)
-    //const response=await axios.post(
-      const {data}=await axios.post(
+           // если мы используем их в коде - нужно брать value
+           first_name: first_name.value,
+           last_name: last_name.value,
+           email: email.value,
+           password: password.value,
+           password_сonfirm: password_confirm.value,
+         })// для корректного вывода в консоли стаим submit.prevent в атрибуте формы
+      */
+      // Отправляем POST-запрос на сервер по нужному адресу (в бэкенд)
+      // если мы используем их в коде - нужно брать value
+      // отключаем camelcase в .eslintrc.js ( '@typescript-eslint/camelcase': "off")
+      // эти имена (слева, до двоеточия) будут в JSON-запроса
+      // const response = await axios.post(
+      const {data} = await axios.post(
           'http://localhost:3000/api/register',
           {
-
-            // если мы используем их в коде - нужно брать value
-            // отключаем camelcase в .eslintrc.js ( '@typescript-eslint/camelcase': "off")
-            // эти имена (слева) будут в JSON запроса
             first_name: firstName.value,
             last_name: lastName.value,
             email: email.value,
@@ -89,10 +88,9 @@ export default {
           })
 
       //выводим в консоль все
-//      console.log(response);
-      // если выводить в консоль только данные (обратите внимание на {data выше}
+      // console.log(response);
+      // если нужно выводить в консоль только данные (обратите внимание на {data выше}
       console.log(data);
-
     }
     return {
       firstname: firstName,
@@ -117,10 +115,12 @@ body {
 .form-signin {
   max-width: 330px;
   padding: 1rem;
+
 }
 
 .form-signin .form-floating:focus-within {
   z-index: 2;
+
 }
 
 /*Стили для всех полей ввода*/
@@ -128,6 +128,10 @@ body {
   margin-bottom: 3px;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
+  /* цвет фона */
+  background-color: #303030;
+  /* цвет текста */
+  color: #fdc900;
 }
 
 /*стили для конкретного поля ввода*/

@@ -20,7 +20,7 @@ import NavComponent from "@/components/nav-component.vue";
 import MenuComponent from "@/components/menu-component.vue";
 
 export default {
-  components:{
+  components: {
     NavComponent,
     MenuComponent
   }

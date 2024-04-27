@@ -1,6 +1,5 @@
-
 <template>
- Dashboard
+  Dashboard
 </template>
 
 <script setup lang="ts">

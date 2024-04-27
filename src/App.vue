@@ -1,12 +1,13 @@
 <template>
+  <!-- Наполнение будет описано в роутере (index.ts, раздел "const routes")-->
   <router-view></router-view>
-<!-- <wrapper-page/>-->
+  <!-- <wrapper-page/>-->
 </template>
 
 <style>
 /* Установки рабочей области (кроме меню и панели навигации)*/
 body {
-  /* масштаб шрифта*/
+  /* масштаб шрифта */
   font-size: 1.0rem;
   /* цвет фона */
   background-color: #303030;
@@ -29,8 +30,8 @@ body {
     position: sticky;
     top: 48px;
   }
-  /* стиль строки поиска (пока отсутствует) */
 
+  /* стиль строки поиска (пока отсутствует) */
   .navbar-search {
     display: block;
   }
@@ -73,8 +74,7 @@ body {
 import {defineComponent} from "vue";
 
 export default defineComponent({
-  components: {
-  }
-}
+      components: {}
+    }
 )
 </script>
