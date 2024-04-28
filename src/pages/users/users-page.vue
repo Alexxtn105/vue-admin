@@ -24,6 +24,7 @@
 </template>
 
 <!--Здесь используем сиснтаксис script setup, доступный в vue 3.-->
+<!--Хороший материал по теме: https://www.koderhq.com/tutorial/vue/script-setup/-->
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
 import axios from "axios";
