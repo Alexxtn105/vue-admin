@@ -1,7 +1,7 @@
 import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router'
 
 import DashboardPage from "@/pages/dashboard-page.vue";
-import UsersPage from "@/pages/users-page.vue";
+import UsersPage from "@/pages/users/users-page.vue";
 import RegisterPage from "@/pages/register-page.vue";
 import wrapperPage from "@/pages/wrapper-page.vue";
 import LoginPage from "@/pages/login-page.vue";
