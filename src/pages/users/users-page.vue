@@ -39,7 +39,7 @@
 <!--Здесь используем сиснтаксис script setup, доступный в vue 3.-->
 <!--Хороший материал по теме: https://www.koderhq.com/tutorial/vue/script-setup/-->
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
+import {onMounted, ref, watch} from "vue";
 import axios from "axios";
 
 //объявляем пустой массив для списка всех пользователей
@@ -66,23 +66,41 @@ const load = async () => {
 // выводим список всех пользователей
 onMounted(load);
 
-//добавляем постраничный вывод (pagination)
+// вариант страничного вывода с watch:
+// при изменении наблюдаемой величины вызывается функция load
+watch(page, load);
+
+//добавляем постраничный вывод (pagination) - ВАРИАНТ с watch
 //переход на предыдцщую страницу
 const prev = async () => {
-  if (page.value <= 1)
-    return
-  page.value--;
-  await load();
+  //просто меняем номер страницы
+  if (page.value > 1)
+    page.value--;
 };
 
 //переход на следующую страницу
 const next = async () => {
-  if (page.value > lastPage.value)
-    return;
-
-  page.value++;
-  await load();
+  //просто меняем номер страницы
+  if (page.value < lastPage.value)
+    page.value++;
 };
+
+// //добавляем постраничный вывод (pagination) - ВАРИАНТ БЕЗ watch
+// //переход на предыдцщую страницу
+// const prev = async () => {
+//   if (page.value <= 1)
+//     return
+//   page.value--;
+//   await load();
+// };
+//
+// //переход на следующую страницу
+// const next = async () => {
+//   if (page.value > lastPage.value)
+//     return;
+//   page.value++;
+//   await load();
+// };
 
 </script>
 
