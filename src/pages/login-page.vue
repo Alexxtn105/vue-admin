@@ -1,87 +1,79 @@
 <!--Для использования TypeScript устанавливаем атрибут lang="ts"-->
-<script>
-//отличие reactive от ref в том, что в re4active мы можем группировать несколько переменных
+<script setup>
+//отличие reactive от ref в том, что в reactive мы можем группировать несколько переменных
 import {reactive} from "vue";
 import {ref} from "vue";
 import {useRouter} from "vue-router";
 import axios from "axios";
 
-export default {
-  setup() {
-    // Создаем объединенную переменную вместо двух разных.
-    // В этом и есть отличие reactive от ref
-    const form = reactive(
-        {
-          email: '',
-          password: ''
-        });
 
-    //создаем роутер для редиректа
-    const router = useRouter();
+// Создаем объединенную переменную вместо двух разных.
+// В этом и есть отличие reactive от ref
+const form = reactive(
+    {
+      email: '',
+      password: ''
+    });
 
-    //реакция на нажатие кнопки
-    const submit = async () => {
-      // //тестовый вывод данных в консоль
-      // console.log({
-      //   email: form.email,
-      //   password: form.password
-      // })
+//создаем роутер для редиректа
+const router = useRouter();
 
-      await axios.post(
-          //'http://localhost:3000/api/login',
-          'login',  // базовый URL в main.ts (например: http://localhost:3000/api/)
-          {
-            email: form.email,
-            password: form.password
-          },
-          {
-            // !!! Вынес withCredentials в дефолты axios (main.ts),
-            // поэтому нижнюю можно закомментить
-             withCredentials: true  // <-- ВНИМАНИЕ!!! Обязательно добавляем параметр withCredentials:true, будут взяты куки из бэкэнда!
-          }
-      );
+//реакция на нажатие кнопки
+const submit = async () => {
+  // //тестовый вывод данных в консоль
+  // console.log({
+  //   email: form.email,
+  //   password: form.password
+  // })
 
-      //в случае успешного логина переходим на главную страницу
-      await router.push('/');
+  // нужно сконфигурировать axios в main.ts
 
-// нужно сконфигурировать axios в main.ts
+  await axios.post(
+      //'http://localhost:3000/api/login',
+      'login',  // базовый URL в main.ts (например: http://localhost:3000/api/)
+      {
+        email: form.email,
+        password: form.password
+      },
+      {
+        // !!! Вынес withCredentials в дефолты axios (main.ts),
+        // поэтому нижнюю можно закомментить
+        withCredentials: true  // <-- ВНИМАНИЕ!!! Обязательно добавляем параметр withCredentials:true, будут взяты куки из бэкэнда!
+      }
+  );
+
+  //в случае успешного логина переходим на главную страницу
+  await router.push('/');
+};
 
 
-    }
+////мой вариант без reactive
+// setup() {
+//   const email = ref('');
+//   const password = ref('');
+//
+//   //создаем роутер для редиректа
+//   const router = useRouter();
+//
+//   const submit = async () => {
+//     await axios.post(
+//         'http://localhost:3000/api/login',
+//         {
+//           email: email.value,
+//           password: password.value,
+//         });
+//
+//     //в случае успешной регистрации переходим на страницу логина
+//     await router.push('/login');
+//   };
+//
+//   return {
+//     email,
+//     password,
+//     submit,
+//   }
+// }
 
-    return {
-      form,
-      submit
-    }
-  }
-
-  ////мой вариант без reactive
-  // setup() {
-  //   const email = ref('');
-  //   const password = ref('');
-  //
-  //   //создаем роутер для редиректа
-  //   const router = useRouter();
-  //
-  //   const submit = async () => {
-  //     await axios.post(
-  //         'http://localhost:3000/api/login',
-  //         {
-  //           email: email.value,
-  //           password: password.value,
-  //         });
-  //
-  //     //в случае успешной регистрации переходим на страницу логина
-  //     await router.push('/login');
-  //   };
-  //
-  //   return {
-  //     email,
-  //     password,
-  //     submit,
-  //   }
-  // }
-}
 </script>
 
 <!--Шаблон компонента-->

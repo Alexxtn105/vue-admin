@@ -81,7 +81,7 @@ const prev = async () => {
 //переход на следующую страницу
 const next = async () => {
   //просто меняем номер страницы
-  if (page.value < lastPage.value)
+  if (page.value <= lastPage.value)
     page.value++;
 };
 
