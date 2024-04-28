@@ -1,4 +1,3 @@
-
 <!--Для использования TypeScript устанавливаем атрибут lang="ts"-->
 <script lang="ts">
 
@@ -69,7 +68,7 @@ export default {
 }
 </script>
 
-
+<!--Шаблон компонента-->
 <template>
   <main class="form-signin w-100 m-auto">
     <!-- Присваиваем атрибуту @submit реакцию на нажатие кнопки "Зарегистрироваться"-->

@@ -1,9 +1,11 @@
+<!--Шаблон-->
 <template>
   <!-- Наполнение будет описано в роутере (index.ts, раздел "const routes")-->
   <router-view></router-view>
-  <!-- <wrapper-page/>-->
+
 </template>
 
+<!--Стиль-->
 <style>
 /* Установки рабочей области (кроме меню и панели навигации)*/
 body {
@@ -69,6 +71,7 @@ body {
 }
 </style>
 
+<!--Скрипт-->
 <script>
 
 import {defineComponent} from "vue";
