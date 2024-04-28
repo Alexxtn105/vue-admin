@@ -28,15 +28,16 @@ export default {
       // })
 
       await axios.post(
-    //      'http://localhost:3000/api/login',
+          //'http://localhost:3000/api/login',
           'login',  // базовый URL в main.ts (например: http://localhost:3000/api/)
           {
             email: form.email,
             password: form.password
           },
           {
-            // !!! Вынес withCredentials в дефолты axios (main.ts), поэтому нижнюю можно закомментить
-           // withCredentials: true  // <-- ВНИМАНИЕ!!! Обязательно добавляем параметр withCredentials:true, будут взяты куки из бэкэнда!
+            // !!! Вынес withCredentials в дефолты axios (main.ts),
+            // поэтому нижнюю можно закомментить
+             withCredentials: true  // <-- ВНИМАНИЕ!!! Обязательно добавляем параметр withCredentials:true, будут взяты куки из бэкэнда!
           }
       );
 

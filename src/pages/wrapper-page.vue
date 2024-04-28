@@ -1,3 +1,32 @@
+<!--Этот шаблон обертывает все нужные страницы для аутентифицированного пользователя-->
+<script>
+import NavComponent from "@/components/nav-component.vue";
+import MenuComponent from "@/components/menu-component.vue";
+import {onMounted} from "vue";
+import axios from "axios";
+
+export default {
+  components: {
+    NavComponent,
+    MenuComponent
+  },
+  setup() {
+    // прежде чем использовать axios, необходимо дождаться,
+    // пока отрендерится вся html-страничка,
+    // поэтому используем событие onMounted:
+    onMounted(async () => {
+      //const {data} = await axios.get('user', {withCredentials: true});
+      const {data} = await axios.get('user'); // конфиг withCredentials: true вынес в дефолты (main.ts)
+      console.log(data)
+    })
+  }
+
+}
+
+
+</script>
+
+<!--Шаблон компонента-->
 <template>
   <nav-component/>
 
@@ -15,19 +44,7 @@
   </div>
 </template>
 
-<script>
-import NavComponent from "@/components/nav-component.vue";
-import MenuComponent from "@/components/menu-component.vue";
-
-export default {
-  components: {
-    NavComponent,
-    MenuComponent
-  }
-}
-
-</script>
-
+<!--Стиль компонента-->
 <style scoped>
 
 </style>
