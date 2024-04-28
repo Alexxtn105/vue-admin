@@ -4,9 +4,9 @@
 
     <nav class="my-2 my-md-0 nr-md-3">
       <!--Имя залогиненного пользователя (через router-link), ведет на страницу профиля пользователя-->
-      <router-link to="/profile" class="p-2 text-white text-decoration-none" href="#">{{ name }}</router-link>
-      <!--Кнопка выйти-->
-      <a class="p-2 text-white text-decoration-none" href="#">Выйти</a>
+      <router-link to="/profile" class="p-2 text-white text-decoration-none">{{ name }}</router-link>
+      <!--Кнопка выйти. Переходим на страницу логина, добавляем атрибут @click-->
+      <router-link to="/login" class="p-2 text-white text-decoration-none" @click="logout">Выйти</router-link>
     </nav>
   </nav>
 
@@ -40,26 +40,40 @@
 
 import {onMounted, ref} from "vue";
 import axios from "axios";
+import {useRouter} from "vue-router";
+import router from "@/router";
 
 export default {
 
   setup() {
     const name = ref('')
+    const router = useRouter()
 
     // прежде чем использовать axios, необходимо дождаться,
     // пока отрендерится вся html-страничка,
     // поэтому используем событие onMounted:
     onMounted(async () => {
-      //const {data} = await axios.get('user', {withCredentials: true});
-      const {data} = await axios.get('user'); // конфиг withCredentials: true вынес в дефолты (main.ts)
+      try {
+        //const {data} = await axios.get('user', {withCredentials: true});
+        const {data} = await axios.get('user'); // конфиг withCredentials: true вынес в дефолты (main.ts)
 
-      //присваиваем величину текущего залогиненного пользователя из полученного json
-      name.value = data.first_name + ' ' + data.last_name;
-      console.log(data)
+        //присваиваем величину текущего залогиненного пользователя из полученного json
+        name.value = data.first_name + ' ' + data.last_name;
+        console.log(data)
+      } catch (e) {
+        // !! Редирект на страницу логина в случае ошибки (пользователь не аутентифицирован или что-то еще)
+        await router.push('/login');
+      }
     });
 
+    const logout = async () => {
+      // вызываем в бэк-енде функцию логаута
+      await axios.post('logout')
+    }
+
     return {
-      name
+      name,
+      logout
     }
   }
 }
