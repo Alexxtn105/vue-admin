@@ -38,7 +38,8 @@ export default {
       // const response = await axios.post(
       // const {data} =
       await axios.post(
-          'http://localhost:3000/api/register',
+          //'http://localhost:3000/api/register',
+          'register', // базовый URL в main.ts (например: http://localhost:3000/api/)
           {
             first_name: firstName.value,
             last_name: lastName.value,

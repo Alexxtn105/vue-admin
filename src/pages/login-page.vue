@@ -16,14 +16,35 @@ export default {
           password: ''
         });
 
-    //реакция на нажатие кнопки
-    const submit = () => {
+    //создаем роутер для редиректа
+    const router = useRouter();
 
-      //тестовый вывод в консоль
-      console.log({
-        email: form.email,
-        password: form.password
-      })
+    //реакция на нажатие кнопки
+    const submit = async () => {
+      // //тестовый вывод данных в консоль
+      // console.log({
+      //   email: form.email,
+      //   password: form.password
+      // })
+
+      await axios.post(
+    //      'http://localhost:3000/api/login',
+          'login',  // базовый URL в main.ts (например: http://localhost:3000/api/)
+          {
+            email: form.email,
+            password: form.password
+          },
+          {
+            // !!! Вынес withCredentials в дефолты axios (main.ts), поэтому нижнюю можно закомментить
+           // withCredentials: true  // <-- ВНИМАНИЕ!!! Обязательно добавляем параметр withCredentials:true, будут взяты куки из бэкэнда!
+          }
+      );
+
+      //в случае успешного логина переходим на главную страницу
+      await router.push('/');
+
+// нужно сконфигурировать axios в main.ts
+
 
     }
 
