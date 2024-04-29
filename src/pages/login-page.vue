@@ -95,6 +95,8 @@ const submit = async () => {
         <label for="floatingPassword">Пароль</label>
       </div>
 
+
+
       <!-- Галочка "Запомнить меня"-->
       <!-- <div class="form-check text-start my-3">-->
       <!--   <input class="form-check-input" type="checkbox" value="remember-me">-->

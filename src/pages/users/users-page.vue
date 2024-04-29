@@ -17,7 +17,11 @@
         <td>{{ user.first_name + ' ' + user.last_name }}</td>
         <td>{{ user.email }}</td>
         <td>{{ user.role.name }}</td>
-        <td></td>
+        <td>
+<!--          <div class="btn-group mr-2">-->
+<!--            <a href="javascript:void(0)" class="btn btn-sn btn-outline-secondary">Удалить</a>-->
+<!--          </div>-->
+        </td>
       </tr>
       </tbody>
     </table>

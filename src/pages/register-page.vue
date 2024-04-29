@@ -1,15 +1,15 @@
 <!--Для использования TypeScript устанавливаем атрибут lang="ts"-->
 
 <!--Вариант setup script почему-то не сохраняет имя и фамилию. Оставил пока так-->
-<script lang="ts">
+<script setup lang="ts">
 
 // ОБЯЗАТЕЛЬНО объявляем переменную ref!!!
 import {ref} from 'vue';
 import axios from 'axios';
 import {useRouter} from "vue-router";
 
-export default {
-  setup() {
+//export default {
+//  setup() {
     const firstName = ref('');
     const lastName = ref('');
     const email = ref('');
@@ -58,17 +58,17 @@ export default {
       // если нужно выводить в консоль только данные (обратите внимание на {data выше}
       // console.log(data);
     }
-    return {
-      firstname: firstName,
-      lastname: lastName,
-      email,
-      password,
-      passwordConfirm: passwordConfirm,
-      submit,
-    }
+    // return {
+    //   firstName,
+    //   lastName,
+    //   email,
+    //   password,
+    //   passwordConfirm,
+    //   submit,
+    // }
 
-  }
-}
+//  }
+//}
 </script>
 
 <!--Шаблон компонента-->
@@ -81,11 +81,11 @@ export default {
       <h1 class="h3 mb-3 fw-normal">Регистрация</h1>
 
       <div class="form-floating">
-        <input v-model="firstname" class="form-control" placeholder="Фамилия">
+        <input v-model="firstName" class="form-control" placeholder="Фамилия">
         <label for="floatingInput">Фамилия</label>
       </div>
       <div class="form-floating">
-        <input v-model="lastname" class="form-control" placeholder="Имя">
+        <input v-model="lastName" class="form-control" placeholder="Имя">
         <label for="floatingInput">Имя</label>
       </div>
       <!-- <div class="form-floating">-->
