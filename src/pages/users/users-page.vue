@@ -1,4 +1,9 @@
 <template>
+  <!--Кнопка Добавить пользователя-->
+  <div class="btn-group mr-2">
+    <router-link to="/users/create" class="btn btn-sn btn-outline-secondary">Добавить</router-link>
+  </div>
+
   <!--  Таблица пользователей-->
   <div class="table-responsive small">
     <table class="table table-striped table-sm">
@@ -18,6 +23,7 @@
         <td>{{ user.email }}</td>
         <td>{{ user.role.name }}</td>
         <td>
+          <!--Кнопка Удалить пользователя-->
           <div class="btn-group mr-2">
             <a href="javascript:void(0)" class="btn btn-sn btn-outline-secondary" @click="del(user.id)">Удалить</a>
           </div>
@@ -107,6 +113,16 @@ const del = async (id: number) => {
     } catch (e) {
       alert(e)
     }
+  }
+}
+
+// Функция добавления пользователя
+const addUser = async () => {
+  try {
+    await axios.post('users')
+
+  } catch (e) {
+    alert(e);
   }
 }
 

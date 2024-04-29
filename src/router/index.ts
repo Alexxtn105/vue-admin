@@ -5,6 +5,7 @@ import UsersPage from "@/pages/users/users-page.vue";
 import RegisterPage from "@/pages/register-page.vue";
 import wrapperPage from "@/pages/wrapper-page.vue";
 import LoginPage from "@/pages/login-page.vue";
+import UserCreateComponent from "@/pages/users/user-create-component.vue";
 
 const routes: Array<RouteRecordRaw> = [
     {path: '/register', component: RegisterPage},
@@ -15,6 +16,7 @@ const routes: Array<RouteRecordRaw> = [
         children: [
             {path: '', component: DashboardPage},
             {path: '/users', component: UsersPage},
+            {path: '/users/create', component: UserCreateComponent},
         ]
     },
 
