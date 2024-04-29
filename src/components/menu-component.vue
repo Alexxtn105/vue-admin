@@ -13,14 +13,22 @@
             <!--Указываем router-link to / -->
             <!--Для подсветки текущего выделенного пункта меню - используем active-class="active" -->
             <router-link to="/" active-class="active" class="nav-link">
-              Dashboard
+              График
             </router-link>
           </li>
           <li class="nav-item">
             <!--Указываем router-link to /users -->
             <!--Для подсветки текущего выделенного пункта меню - используем active-class="active" -->
             <router-link to="/users" active-class="active" class="nav-link">
-              Users
+              Пользователи
+            </router-link>
+          </li>
+
+          <li class="nav-item">
+            <!--Указываем router-link to /roles -->
+            <!--Для подсветки текущего выделенного пункта меню - используем active-class="active" -->
+            <router-link to="/roles" active-class="active" class="nav-link">
+              Роли
             </router-link>
           </li>
 
