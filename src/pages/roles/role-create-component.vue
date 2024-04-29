@@ -4,7 +4,8 @@ import axios from "axios";
 import {useRouter} from "vue-router";
 
 // Переменная формы с использование reactive
-let formData: UnwrapNestedRefs<{ permissions: string[]; name: string }>;
+//  явно указываем типы данных
+let formData: UnwrapNestedRefs<{ permissions: number[]; name: string }>;
 formData = reactive({
   name: '',
   permissions: [] // этот список меняется
@@ -25,7 +26,7 @@ onMounted(async () => {
   permissionList.value = data;
 });
 
-const select = (id: string, checked: boolean) => {
+const select = (id: number, checked: boolean) => {
   // если разрешение отмечено или нет - сделать как надо
   if (checked) {
     formData.permissions = [...formData.permissions, id];
