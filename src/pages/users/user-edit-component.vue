@@ -40,7 +40,7 @@ onMounted(async () => {
 
     // получили response с сервера, присваиваем нашим данным полученное
     data.first_name = response.data.first_name;
-    data.last_name = response.data.first_name;
+    data.last_name = response.data.last_name;
     data.email = response.data.email;
     data.role_id = response.data.role.id; // <-- обратите внимание на правую часть
 
