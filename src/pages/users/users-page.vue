@@ -18,9 +18,9 @@
         <td>{{ user.email }}</td>
         <td>{{ user.role.name }}</td>
         <td>
-<!--          <div class="btn-group mr-2">-->
-<!--            <a href="javascript:void(0)" class="btn btn-sn btn-outline-secondary">Удалить</a>-->
-<!--          </div>-->
+          <div class="btn-group mr-2">
+            <a href="javascript:void(0)" class="btn btn-sn btn-outline-secondary" @click="del(user.id)">Удалить</a>
+          </div>
         </td>
       </tr>
       </tbody>
@@ -45,6 +45,7 @@
 <script setup lang="ts">
 import {onMounted, ref, watch} from "vue";
 import axios from "axios";
+import {User} from '@/models/User'
 
 //объявляем пустой массив для списка всех пользователей
 const users = ref([]);
@@ -74,6 +75,7 @@ onMounted(load);
 // при изменении наблюдаемой величины вызывается функция load
 watch(page, load);
 
+
 //добавляем постраничный вывод (pagination) - ВАРИАНТ с watch
 //переход на предыдцщую страницу
 const prev = async () => {
@@ -89,22 +91,25 @@ const next = async () => {
     page.value++;
 };
 
-// //добавляем постраничный вывод (pagination) - ВАРИАНТ БЕЗ watch
-// //переход на предыдцщую страницу
-// const prev = async () => {
-//   if (page.value <= 1)
-//     return
-//   page.value--;
-//   await load();
-// };
-//
-// //переход на следующую страницу
-// const next = async () => {
-//   if (page.value > lastPage.value)
-//     return;
-//   page.value++;
-//   await load();
-// };
+// Функция удаления пользователя из таблицы
+// в параметрах - id пользователя
+const del = async (id: number) => {
+  //выводим подтверждение
+  if (confirm('Вы уверены, что желаете удалить пользователя?')) {
+    //alert(`users/${id}`)
+    // удалаяем пользователя в бэкенде
+    try {
+      await axios.delete(`users/${id}`);
+      // также обновляем данные во фроненде
+      // предварительно нужно создать структуру user в @/models/user (документ typescript)
+      // фактически, просто применяем фильтр (не равно ИД пользователя)
+      users.value = users.value.filter((u: User) => u.id !== id);
+    } catch (e) {
+      alert(e)
+    }
+  }
+}
+
 
 </script>
 

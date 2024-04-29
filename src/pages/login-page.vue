@@ -27,23 +27,29 @@ const submit = async () => {
   // })
 
   // нужно сконфигурировать axios в main.ts
+  try {
 
-  await axios.post(
-      //'http://localhost:3000/api/login',
-      'login',  // базовый URL в main.ts (например: http://localhost:3000/api/)
-      {
-        email: form.email,
-        password: form.password
-      },
-      {
-        // !!! Вынес withCredentials в дефолты axios (main.ts),
-        // поэтому нижнюю можно закомментить
-        withCredentials: true  // <-- ВНИМАНИЕ!!! Обязательно добавляем параметр withCredentials:true, будут взяты куки из бэкэнда!
-      }
-  );
 
-  //в случае успешного логина переходим на главную страницу
-  await router.push('/');
+    await axios.post(
+        //'http://localhost:3000/api/login',
+        'login',  // базовый URL в main.ts (например: http://localhost:3000/api/)
+        {
+          email: form.email,
+          password: form.password
+        },
+        {
+          // !!! Вынес withCredentials в дефолты axios (main.ts),
+          // поэтому нижнюю можно закомментить
+          withCredentials: true  // <-- ВНИМАНИЕ!!! Обязательно добавляем параметр withCredentials:true, будут взяты куки из бэкэнда!
+        }
+    );
+
+    //в случае успешного логина переходим на главную страницу
+    await router.push('/');
+  } catch (e) {
+    alert(e)
+  }
+
 };
 
 
@@ -94,7 +100,6 @@ const submit = async () => {
         <input v-model="form.password" type="password" class="form-control" placeholder="Пароль">
         <label for="floatingPassword">Пароль</label>
       </div>
-
 
 
       <!-- Галочка "Запомнить меня"-->

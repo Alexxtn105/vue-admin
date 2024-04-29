@@ -10,62 +10,65 @@ import {useRouter} from "vue-router";
 
 //export default {
 //  setup() {
-    const firstName = ref('');
-    const lastName = ref('');
-    const email = ref('');
-    const password = ref('');
-    const passwordConfirm = ref('');
+const firstName = ref('');
+const lastName = ref('');
+const email = ref('');
+const password = ref('');
+const passwordConfirm = ref('');
 
-    //создаем роутер для редиректа
-    const router = useRouter();
+//создаем роутер для редиректа
+const router = useRouter();
 
-    const submit = async () => {
-      // отключаем camelcase в .eslintrc.js ( '@typescript-eslint/camelcase': "off")
-      // тестовый вывод данных в консоль
-      /*
-         console.log({
+const submit = async () => {
+  // отключаем camelcase в .eslintrc.js ( '@typescript-eslint/camelcase': "off")
+  // тестовый вывод данных в консоль
+  /*
+     console.log({
 
-           // если мы используем их в коде - нужно брать value
-           first_name: first_name.value,
-           last_name: last_name.value,
-           email: email.value,
-           password: password.value,
-           password_сonfirm: password_confirm.value,
-         })// для корректного вывода в консоли стаим submit.prevent в атрибуте формы
-      */
-      // Отправляем POST-запрос на сервер по нужному адресу (в бэкенд)
-      // если мы используем их в коде - нужно брать value
-      // отключаем camelcase в .eslintrc.js ( '@typescript-eslint/camelcase': "off")
-      // эти имена (слева, до двоеточия) будут в JSON-запроса
-      // const response = await axios.post(
-      // const {data} =
-      await axios.post(
-          //'http://localhost:3000/api/register',
-          'register', // базовый URL в main.ts (например: http://localhost:3000/api/)
-          {
-            first_name: firstName.value,
-            last_name: lastName.value,
-            email: email.value,
-            password: password.value,
-            password_confirm: passwordConfirm.value,
-          });
+       // если мы используем их в коде - нужно брать value
+       first_name: first_name.value,
+       last_name: last_name.value,
+       email: email.value,
+       password: password.value,
+       password_сonfirm: password_confirm.value,
+     })// для корректного вывода в консоли стаим submit.prevent в атрибуте формы
+  */
+  // Отправляем POST-запрос на сервер по нужному адресу (в бэкенд)
+  // если мы используем их в коде - нужно брать value
+  // отключаем camelcase в .eslintrc.js ( '@typescript-eslint/camelcase': "off")
+  // эти имена (слева, до двоеточия) будут в JSON-запроса
+  // const response = await axios.post(
+  // const {data} =
+  try {
+    await axios.post(
+        //'http://localhost:3000/api/register',
+        'register', // базовый URL в main.ts (например: http://localhost:3000/api/)
+        {
+          first_name: firstName.value,
+          last_name: lastName.value,
+          email: email.value,
+          password: password.value,
+          password_confirm: passwordConfirm.value,
+        });
 
-      //в случае успешной регистрации переходим на страницу логина
-      await router.push('/login');
-
-      //выводим в консоль все
-      // console.log(response);
-      // если нужно выводить в консоль только данные (обратите внимание на {data выше}
-      // console.log(data);
-    }
-    // return {
-    //   firstName,
-    //   lastName,
-    //   email,
-    //   password,
-    //   passwordConfirm,
-    //   submit,
-    // }
+    //в случае успешной регистрации переходим на страницу логина
+    await router.push('/login');
+  } catch (e) {
+    alert(e)
+  }
+  //выводим в консоль все
+  // console.log(response);
+  // если нужно выводить в консоль только данные (обратите внимание на {data выше}
+  // console.log(data);
+}
+// return {
+//   firstName,
+//   lastName,
+//   email,
+//   password,
+//   passwordConfirm,
+//   submit,
+// }
 
 //  }
 //}
