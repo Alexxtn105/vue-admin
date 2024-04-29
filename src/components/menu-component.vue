@@ -12,7 +12,7 @@
           <li class="nav-item">
             <!--Указываем router-link to / -->
             <!--Для подсветки текущего выделенного пункта меню - используем active-class="active" -->
-            <router-link to="/" active-class="active" class="nav-link">
+            <router-link to="/dashboard" active-class="active" class="nav-link">
               График
             </router-link>
           </li>

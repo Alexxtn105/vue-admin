@@ -17,7 +17,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '',
         component: wrapperPage,
         children: [
-            {path: '', component: DashboardPage},
+            {path: '/dashboard', component: DashboardPage},
             {path: '/users', component: UsersPage},
             {path: '/users/create', component: UserCreateComponent},
             {path: '/users/:id/edit', component: UserEditComponent},
