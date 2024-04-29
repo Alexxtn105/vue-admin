@@ -23,10 +23,16 @@
         <td>{{ user.email }}</td>
         <td>{{ user.role.name }}</td>
         <td>
+          <!--Кнопка Редактировать пользователя-->
+          <div class="btn-group mr-2">
+            <router-link :to="`/users/${user.id}/edit`" class="btn btn-sn btn-outline-secondary">Редактировать
+            </router-link>
+          </div>
           <!--Кнопка Удалить пользователя-->
           <div class="btn-group mr-2">
             <a href="javascript:void(0)" class="btn btn-sn btn-outline-secondary" @click="del(user.id)">Удалить</a>
           </div>
+
         </td>
       </tr>
       </tbody>
@@ -96,6 +102,7 @@ const next = async () => {
   if (page.value <= lastPage.value)
     page.value++;
 };
+
 
 // Функция удаления пользователя из таблицы
 // в параметрах - id пользователя
