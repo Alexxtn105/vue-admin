@@ -8,6 +8,7 @@ import LoginPage from "@/pages/login-page.vue";
 import UserCreateComponent from "@/pages/users/user-create-component.vue";
 import UserEditComponent from "@/pages/users/user-edit-component.vue";
 import RolesPage from "@/pages/roles/roles-page.vue";
+import RoleCreateComponent from "@/pages/roles/role-create-component.vue";
 
 const routes: Array<RouteRecordRaw> = [
     {path: '/register', component: RegisterPage},
@@ -21,6 +22,7 @@ const routes: Array<RouteRecordRaw> = [
             {path: '/users/create', component: UserCreateComponent},
             {path: '/users/:id/edit', component: UserEditComponent},
             {path: '/roles', component: RolesPage},
+            {path: '/roles/create', component:RoleCreateComponent},
         ]
     },
 

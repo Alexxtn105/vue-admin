@@ -35,6 +35,11 @@ const del = async (id: number) => {
 </script>
 
 <template>
+  <!--Кнопка Добавить роль-->
+  <div class="btn-group mr-2">
+    <router-link to="/roles/create" class="btn btn-sn btn-outline-secondary">Добавить</router-link>
+  </div>
+
   <!--  Таблица ролей-->
   <div class="table-responsive small">
     <table class="table table-striped table-sm">
