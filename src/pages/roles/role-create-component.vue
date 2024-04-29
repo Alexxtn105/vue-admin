@@ -4,8 +4,8 @@ import axios from "axios";
 import {useRouter} from "vue-router";
 
 // Переменная формы с использование reactive
-//let formData: UnwrapNestedRefs<{ permissions: number[]; name: string }>;
-const formData = reactive({
+let formData: UnwrapNestedRefs<{ permissions: string[]; name: string }>;
+formData = reactive({
   name: '',
   permissions: [] // этот список меняется
 });
@@ -25,10 +25,10 @@ onMounted(async () => {
   permissionList.value = data;
 });
 
-const select = (id: number, checked: boolean) => {
+const select = (id: string, checked: boolean) => {
   // если разрешение отмечено или нет - сделать как надо
   if (checked) {
-    formData.permissions = [...formData.permissions, id as never];
+    formData.permissions = [...formData.permissions, id];
     return;
   }
 
@@ -40,10 +40,10 @@ const select = (id: number, checked: boolean) => {
 const submit = async () => {
   try {
     // тестовый вывод в консоль
-     console.log(formData);
+     console.log(formData.permissions);
 
     // постим форму в бэкенд
-    //await axios.post('roles', formData);
+    await axios.post('roles', formData);
 
     //редирект на страницу пользователей в случае успеха
     await router.push('/roles');
