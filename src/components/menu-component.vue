@@ -3,7 +3,7 @@
     <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu"
          aria-labelledby="sidebarMenuLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="sidebarMenuLabel">Company name</h5>
+        <h5 class="offcanvas-title" id="sidebarMenuLabel">AlexxTN</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"
                 aria-label="Close"></button>
       </div>
@@ -31,7 +31,13 @@
               Роли
             </router-link>
           </li>
-
+          <li class="nav-item">
+            <!--Указываем router-link to /roles -->
+            <!--Для подсветки текущего выделенного пункта меню - используем active-class="active" -->
+            <router-link to="/products" active-class="active" class="nav-link">
+              Товары
+            </router-link>
+          </li>
         </ul>
       </div>
     </div>

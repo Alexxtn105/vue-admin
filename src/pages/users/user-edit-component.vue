@@ -68,7 +68,6 @@ const submit = async () => {
 
 </script>
 
-
 <!--Шаблон формы-->
 <template>
   <main class="form-signin w-100 m-auto">

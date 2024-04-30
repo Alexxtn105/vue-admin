@@ -7,6 +7,7 @@ import {User} from '@/models/User'
 
 //объявляем пустой массив для списка всех пользователей
 const users = ref([]);
+// переменные для страничного вывода
 const page = ref(1);
 const lastPage = ref(0);
 
@@ -17,7 +18,7 @@ const load = async () => {
   // вариант с pagination
   const {data} = await axios.get(`users?page=${page.value}`);
 
-  // Присваиваем влеичине users полученные из бэкенда данные
+  // Присваиваем величине users полученные из бэкенда данные
   // Здесь data.data означает то, что первая величина обеспечивается axios'ом,
   // а вторая бэкендом, так как мы используем pagination
   users.value = data.data;
