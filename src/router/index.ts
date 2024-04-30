@@ -27,7 +27,6 @@ const routes: Array<RouteRecordRaw> = [
             {path: '/roles/:id/edit', component: RoleEditComponent},
         ]
     },
-
 ]
 
 const router = createRouter({

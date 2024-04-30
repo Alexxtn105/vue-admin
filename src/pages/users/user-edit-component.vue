@@ -94,7 +94,8 @@ const submit = async () => {
         </select>
       </div>
 
-      <button class="btn btn-primary w-100 py-2" type="submit">Сохранить</button>
+      <button class="btn btn-primary w-50 py-2" type="submit">Сохранить</button>
+      <router-link to="/users" class="btn btn-secondary w-50 py-2">Отмена</router-link>
     </form>
   </main>
 </template>
