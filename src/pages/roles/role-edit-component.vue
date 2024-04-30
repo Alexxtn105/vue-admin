@@ -1,22 +1,28 @@
 <script setup lang="ts">
 import {onMounted, reactive, ref, UnwrapNestedRefs} from "vue";
 import axios from "axios";
-import {useRouter} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
+import {Permission} from "@/models/Permission";
 
 // Переменная формы с использование reactive
 //  явно указываем типы данных
-//let formData: UnwrapNestedRefs<{ permissions: number[]; name: string }>;
-const formData = reactive({
+let formData: UnwrapNestedRefs<{ permissions: number[]; name: string }>;
+formData = reactive({
   name: '',
-  permissions: [] as number[] // этот список меняется, также обязательно делаем каст к типу number[]
+  permissions: [] // этот список меняется
 });
 
 const permissionList = ref([]); // это что у нас есть
 
-// роутер для редиректа
+// роцтер для редиректа
 const router = useRouter()
 
-//
+//получаем параметры с помощью useRoue().
+// Он отличается от useRoutes тем, что используется для получения параметров,
+// а useRouter используется для навигации по страницам
+// полученный route будет содержать необходимый нам id
+// eslint-disable-next-line no-undef
+const {params} = useRoute()
 
 // заполняем список ролей
 onMounted(async () => {
@@ -26,12 +32,23 @@ onMounted(async () => {
   //formData.permissions = data;
 
   permissionList.value = data;
+
+  //получаем ид текущей роли из параметров в URL
+  const response = await axios.get(`roles/${params.id}`);
+
+  //присваиваем данные из ответа сервера
+  formData.name = response.data.name;
+
+  //чтобы получить массив ид разрешений, нужно создать моедль (@/models.permission.ts)
+  // а также использовать map():
+  formData.permissions = response.data.permissions.map((p:Permission) =>p.id);
+
 });
 
 const select = (id: number, checked: boolean) => {
   // если разрешение отмечено или нет - сделать как надо
   if (checked) {
-    formData.permissions = [...formData.permissions, id];// ... - оператор расширения
+    formData.permissions = [...formData.permissions, id];
     return;
   }
 
@@ -39,14 +56,23 @@ const select = (id: number, checked: boolean) => {
 
 }
 
+// функция расстановки галочек разрешений в соответствии с данными, полученными из бэкенда
+const checked_old = (id: number) => {
+  //возвращаем таким образом (с использованием метода some)
+  //который возвращает true, если искомая величина присутствует в массиве
+  return formData.permissions.some(p => p === id);
+}
+// функцию выше можно сделать короче:
+const checked = (id: number) => formData.permissions.some(p => p === id);
+
 //функция submit - оправка данных формой в бэкенд
 const submit = async () => {
   try {
     // тестовый вывод в консоль
-     console.log(formData.permissions);
+    console.log(formData.permissions);
 
     // постим форму в бэкенд
-    await axios.post('roles', formData);
+    await axios.put(`roles/${params.id}`, formData);
 
     //редирект на страницу пользователей в случае успеха
     await router.push('/roles');
@@ -73,12 +99,14 @@ const submit = async () => {
         <p></p>
         <div class="form-check form-check-inline col-5" v-for="permission in permissionList" :key="permission.id">
           <input class="form-check-input" type="checkbox" :value="permission.id"
+                 :checked="checked(permission.id)"
                  @change="select(permission.id, $event.target.checked)">
           <label class="form-check-label">{{ permission.name }}</label>
         </div>
       </div>
+
       <p></p>
-      <button class="btn btn-primary w-100 py-2" type="submit">Добавить роль</button>
+      <button class="btn btn-primary w-100 py-2" type="submit">Сохранить</button>
     </form>
   </main>
 </template>

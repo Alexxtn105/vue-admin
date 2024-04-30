@@ -16,6 +16,7 @@ const data = reactive({
 // не связаны между собой, это разные данные
 const roles = ref([]);
 
+// роутер для редиректа
 const router = useRouter()
 
 // заполняем список ролей
