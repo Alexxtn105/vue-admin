@@ -1,6 +1,4 @@
 <script setup lang="ts">
-//component:{PaginatorComponent}
-
 import component from "*.vue";
 import {onMounted, ref, watch} from "vue";
 import axios from "axios";

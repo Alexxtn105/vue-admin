@@ -4,19 +4,20 @@
 import {onMounted, ref, watch} from "vue";
 import axios from "axios";
 import {User} from '@/models/User'
+import PaginatorComponent from "@/components/paginator-component.vue";
 
 //объявляем пустой массив для списка всех пользователей
 const users = ref([]);
 // переменные для страничного вывода
-const page = ref(1);
+//const page = ref(1);
 const lastPage = ref(0);
 
 //функция подгрузки списка пользователей
-const load = async () => {
+const load = async (page=1) => {
   // вариант без pagination
   // const {data} = await axios.get('users');
   // вариант с pagination
-  const {data} = await axios.get(`users?page=${page.value}`);
+  const {data} = await axios.get(`users?page=${page}`);
 
   // Присваиваем величине users полученные из бэкенда данные
   // Здесь data.data означает то, что первая величина обеспечивается axios'ом,
@@ -32,23 +33,23 @@ onMounted(load);
 
 // вариант страничного вывода с watch:
 // при изменении наблюдаемой величины вызывается функция load
-watch(page, load);
+// watch(page, load);
 
 
 //добавляем постраничный вывод (pagination) - ВАРИАНТ с watch
 //переход на предыдцщую страницу
-const prev = async () => {
-  //просто меняем номер страницы
-  if (page.value > 1)
-    page.value--;
-};
+// const prev = async () => {
+//   //просто меняем номер страницы
+//   if (page.value > 1)
+//     page.value--;
+// };
 
 //переход на следующую страницу
-const next = async () => {
-  //просто меняем номер страницы
-  if (page.value <= lastPage.value)
-    page.value++;
-};
+// const next = async () => {
+//   //просто меняем номер страницы
+//   if (page.value <= lastPage.value)
+//     page.value++;
+// };
 
 
 // Функция удаления пользователя из таблицы
@@ -115,17 +116,22 @@ const del = async (id: number) => {
     </table>
   </div>
 
+  <!-- Для постраничного вывода будем использовать самописсный компонент paginator-->
+  <!--Передаем последнюю страницу через defineProps, с использованием emit и event-->
+  <paginator-component :last-page="lastPage" @page-changed="load($event)"/>
+
+
   <!--  Кнопки Предыдущая и Следующая-->
-  <nav>
-    <ul class="pagination">
-      <li class="page-item">
-        <a class="page-link" href="javascript:void(0)" @click="prev">Предыдущая</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="javascript:void(0)" @click="next">Следующая</a>
-      </li>
-    </ul>
-  </nav>
+<!--  <nav>-->
+<!--    <ul class="pagination">-->
+<!--      <li class="page-item">-->
+<!--        <a class="page-link" href="javascript:void(0)" @click="prev">Предыдущая</a>-->
+<!--      </li>-->
+<!--      <li class="page-item">-->
+<!--        <a class="page-link" href="javascript:void(0)" @click="next">Следующая</a>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--  </nav>-->
 </template>
 
 
