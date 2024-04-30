@@ -1,24 +1,28 @@
 <script setup lang="ts">
+//component:{PaginatorComponent}
 
+import component from "*.vue";
 import {onMounted, ref, watch} from "vue";
 import axios from "axios";
 import {Product} from "@/models/Product";
+import PaginatorComponent from "@/components/paginator-component.vue";
+
 
 //для полученных с сервера данных
 const products = ref([])
 // переменные для страничного вывода
-const page = ref(1);
+//const page = ref(1);
 const lastPage = ref(0);
 
-const load = async () => {
-  const {data} = await axios.get(`products?page=${page.value}`);
+const load = async (page = 1) => {
+  const {data} = await axios.get(`products?page=${page}`);
 
   //присваиваем data.data поскольку данные выводятся постранично
   products.value = data.data;
 
   //берем индекс последней страницы из принятых данных, чтобы ограничить навигацию
   lastPage.value = data.meta.last_page;
-  //console.log(products.value)
+
 };
 
 //как только сгенерировался html
@@ -26,23 +30,23 @@ onMounted(load);
 
 // вариант страничного вывода с watch:
 // при изменении наблюдаемой величины вызывается функция load
-watch(page, load);
+//watch(page, load);
 
 
 //добавляем постраничный вывод (pagination) - ВАРИАНТ с watch
 //переход на предыдцщую страницу
-const prev = async () => {
-  //просто меняем номер страницы
-  if (page.value > 1)
-    page.value--;
-};
+// const prev = async () => {
+//   //просто меняем номер страницы
+//   if (page.value > 1)
+//     page.value--;
+// };
 
 //переход на следующую страницу
-const next = async () => {
-  //просто меняем номер страницы
-  if (page.value <= lastPage.value)
-    page.value++;
-};
+// const next = async () => {
+//   //просто меняем номер страницы
+//   if (page.value <= lastPage.value)
+//     page.value++;
+// };
 
 // удаление
 // Функция удаления пользователя из таблицы
@@ -111,18 +115,21 @@ const del = async (id: number) => {
       </tbody>
     </table>
   </div>
+  <!-- Для постраничного вывода будем использовать самописсный компонент paginator-->
+  <!--Передаем последнюю страницу через defineProps, с использованием emit и event-->
+  <paginator-component :last-page="lastPage" @page-changed="load($event)"/>
 
   <!--  Кнопки Предыдущая и Следующая-->
-  <nav>
-    <ul class="pagination">
-      <li class="page-item">
-        <a class="page-link" href="javascript:void(0)" @click="prev">Предыдущая</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="javascript:void(0)" @click="next">Следующая</a>
-      </li>
-    </ul>
-  </nav>
+  <!--  <nav>-->
+  <!--    <ul class="pagination">-->
+  <!--      <li class="page-item">-->
+  <!--        <a class="page-link" href="javascript:void(0)" @click="prev">Предыдущая</a>-->
+  <!--      </li>-->
+  <!--      <li class="page-item">-->
+  <!--        <a class="page-link" href="javascript:void(0)" @click="next">Следующая</a>-->
+  <!--      </li>-->
+  <!--    </ul>-->
+  <!--  </nav>-->
 </template>
 
 <style scoped>
