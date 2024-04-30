@@ -1,57 +1,3 @@
-<template>
-  <!--Кнопка Добавить пользователя-->
-  <div class="btn-group mr-2">
-    <router-link to="/users/create" class="btn btn-sn btn-outline-secondary">Добавить</router-link>
-  </div>
-
-  <!--  Таблица пользователей-->
-  <div class="table-responsive small">
-    <table class="table table-striped table-sm">
-      <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Имя</th>
-        <th scope="col">Email</th>
-        <th scope="col">Роль</th>
-        <th scope="col">Действия</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr v-for="user in users" :key="user.id">
-        <td>{{ user.id }}</td>
-        <td>{{ user.first_name + ' ' + user.last_name }}</td>
-        <td>{{ user.email }}</td>
-        <td>{{ user.role.name }}</td>
-        <td>
-          <!--Кнопка Редактировать пользователя-->
-          <div class="btn-group mr-2">
-            <router-link :to="`/users/${user.id}/edit`" class="btn btn-sn btn-outline-secondary">Редактировать
-            </router-link>
-          </div>
-          <!--Кнопка Удалить пользователя-->
-          <div class="btn-group mr-2">
-            <a href="javascript:void(0)" class="btn btn-sn btn-outline-secondary" @click="del(user.id)">Удалить</a>
-          </div>
-
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!--  Кнопки Предыдущая и Следующая-->
-  <nav>
-    <ul class="pagination">
-      <li class="page-item">
-        <a class="page-link" href="javascript:void(0)" @click="prev">Предыдущая</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="javascript:void(0)" @click="next">Следующая</a>
-      </li>
-    </ul>
-  </nav>
-</template>
-
 <!--Здесь используем сиснтаксис script setup, доступный в vue 3.-->
 <!--Хороший материал по теме: https://www.koderhq.com/tutorial/vue/script-setup/-->
 <script setup lang="ts">
@@ -110,9 +56,10 @@ const del = async (id: number) => {
   //выводим подтверждение
   if (confirm('Вы уверены, что желаете удалить пользователя?')) {
     //alert(`users/${id}`)
-    // удалаяем пользователя в бэкенде
     try {
+      // удалаяем пользователя в бэкенде
       await axios.delete(`users/${id}`);
+
       // также обновляем данные во фроненде
       // предварительно нужно создать структуру user в @/models/user (документ typescript)
       // фактически, просто применяем фильтр (не равно ИД пользователя)
@@ -123,18 +70,63 @@ const del = async (id: number) => {
   }
 }
 
-// Функция добавления пользователя
-const addUser = async () => {
-  try {
-    await axios.post('users')
-
-  } catch (e) {
-    alert(e);
-  }
-}
-
-
 </script>
+
+
+<template>
+  <!--Кнопка Добавить пользователя-->
+  <div class="btn-group mr-2">
+    <router-link to="/users/create" class="btn btn-sn btn-outline-secondary">Добавить</router-link>
+  </div>
+
+  <!--  Таблица пользователей-->
+  <div class="table-responsive small">
+    <table class="table table-striped table-sm">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Имя</th>
+        <th scope="col">Email</th>
+        <th scope="col">Роль</th>
+        <th scope="col">Действия</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr v-for="user in users" :key="user.id">
+        <td>{{ user.id }}</td>
+        <td>{{ user.first_name + ' ' + user.last_name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role.name }}</td>
+        <td>
+          <!--Кнопка Редактировать пользователя-->
+          <div class="btn-group mr-2">
+            <router-link :to="`/users/${user.id}/edit`" class="btn btn-sn btn-outline-secondary">Редактировать
+            </router-link>
+          </div>
+          <!--Кнопка Удалить пользователя-->
+          <div class="btn-group mr-2">
+            <a href="javascript:void(0)" class="btn btn-sn btn-outline-secondary" @click="del(user.id)">Удалить</a>
+          </div>
+
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!--  Кнопки Предыдущая и Следующая-->
+  <nav>
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link" href="javascript:void(0)" @click="prev">Предыдущая</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="javascript:void(0)" @click="next">Следующая</a>
+      </li>
+    </ul>
+  </nav>
+</template>
+
 
 <!--Это вариант с кучей бойлерплейта, тянущийся из vue 2-->
 <!--<script lang="ts">-->
