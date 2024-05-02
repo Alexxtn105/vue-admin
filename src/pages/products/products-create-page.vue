@@ -28,26 +28,10 @@ const route = useRoute()
 
 // заполняем список ролей
 onMounted(async () => {
-  try {
-    //делаем запрос в бэкенд
-    const productsResponse = await axios.get('products');
-
-    //присваиваем полученные данные
-    products.value = productsResponse.data;
-
-    // получаем параметры с помощью route
-    // и отправляем get-запрос в бэкенд
-    const response = await axios.get(`products/${route.params.id}`);
-
-    // получили response с сервера, присваиваем нашим данным полученное
-    data.title = response.data.title;
-    data.description = response.data.description;
-    data.image = response.data.image;
-    data.price = response.data.price; // <-- обратите внимание на правую часть
-
-  } catch (e) {
-    alert(e);
-  }
+  //делаем запрос в бэкенд
+  const {data} = await axios.get('products');
+  //присваиваем полученные данные
+  products.value = data;
 });
 
 //функция submit - оправка данных формой в бэкенд
@@ -56,8 +40,8 @@ const submit = async () => {
     // тестовый вывод в консоль
     // console.log(form);
 
-    // постим форму в бэкенд (id пользователя берем из параметров route, объявленного ранее)
-    await axios.put(`products/${route.params.id}`, data);
+    // постим форму в бэкенд
+    await axios.post('products', data);
 
     //редирект на страницу пользователей в случае успеха
     await router.push('/products');

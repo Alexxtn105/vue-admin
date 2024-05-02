@@ -5,13 +5,14 @@ import UsersPage from "@/pages/users/users-page.vue";
 import RegisterPage from "@/pages/register-page.vue";
 import wrapperPage from "@/pages/wrapper-page.vue";
 import LoginPage from "@/pages/login-page.vue";
-import UserCreateComponent from "@/pages/users/user-create-component.vue";
-import UserEditComponent from "@/pages/users/user-edit-component.vue";
+import UserCreatePage from "@/pages/users/user-create-page.vue";
+import UserEditPage from "@/pages/users/user-edit-page.vue";
 import RolesPage from "@/pages/roles/roles-page.vue";
-import RoleCreateComponent from "@/pages/roles/role-create-component.vue";
-import RoleEditComponent from "@/pages/roles/role-edit-component.vue";
+import RoleCreatePage from "@/pages/roles/role-create-page.vue";
+import RoleEditPage from "@/pages/roles/role-edit-page.vue";
 import ProductsPage from "@/pages/products/products-page.vue";
 import ProductsEditPage from "@/pages/products/products-edit-page.vue";
+import ProductsCreatePage from "@/pages/products/products-create-page.vue";
 
 const routes: Array<RouteRecordRaw> = [
     {path: '/register', component: RegisterPage},
@@ -22,13 +23,14 @@ const routes: Array<RouteRecordRaw> = [
         children: [
             {path: '/dashboard', component: DashboardPage},
             {path: '/users', component: UsersPage},
-            {path: '/users/create', component: UserCreateComponent},
-            {path: '/users/:id/edit', component: UserEditComponent},
+            {path: '/users/create', component: UserCreatePage},
+            {path: '/users/:id/edit', component: UserEditPage},
             {path: '/roles', component: RolesPage},
-            {path: '/roles/create', component:RoleCreateComponent},
-            {path: '/roles/:id/edit', component: RoleEditComponent},
+            {path: '/roles/create', component:RoleCreatePage},
+            {path: '/roles/:id/edit', component: RoleEditPage},
             {path: '/products', component:ProductsPage},
             {path: '/products/:id/edit', component:ProductsEditPage},
+            {path: '/products/create', component:ProductsCreatePage},
         ]
     },
 ]
