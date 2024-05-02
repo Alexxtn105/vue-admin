@@ -24,15 +24,15 @@ const router = useRouter()
 // Он отличается от useRoutes тем, что используется для получения параметров,
 // а useRouter используется для навигации по страницам
 // полученный route будет содержать необходимый нам id
-const route = useRoute()
+//const route = useRoute()
 
 // заполняем список ролей
-onMounted(async () => {
+//onMounted(async () => {
   //делаем запрос в бэкенд
-  const {data} = await axios.get('products');
+//  const {data} = await axios.get('products');
   //присваиваем полученные данные
-  products.value = data;
-});
+ //products.value = data;
+//});
 
 //функция submit - оправка данных формой в бэкенд
 const submit = async () => {
@@ -43,7 +43,7 @@ const submit = async () => {
     // постим форму в бэкенд
     await axios.post('products', data);
 
-    //редирект на страницу пользователей в случае успеха
+    //редирект на страницу товаров в случае успеха
     await router.push('/products');
 
   } catch (e) {
@@ -56,29 +56,29 @@ const submit = async () => {
 </script>
 
 <template>
-  <main class="form-signin w-100 m-auto">
+<!--  <main class="form-signin w-100 m-auto">-->
     <form @submit.prevent="submit">
       <div class="mb-3">
         <label>Название</label>
-        <input v-model="data.title" class="form-control" name="first_name">
+        <input v-model="data.title" class="form-control" name="title">
       </div>
       <div class="mb-3">
         <label>Описание</label>
-        <input v-model="data.description" class="form-control" name="last_name">
+        <textarea v-model="data.description" class="form-control" name="description"></textarea>
       </div>
       <div class="mb-3">
         <label>Изображение</label>
-        <input v-model="data.image" class="form-control" name="email">
+        <input v-model="data.image" class="form-control" name="image">
       </div>
       <div class="mb-3">
         <label>Цена</label>
-        <input v-model="data.price" class="form-control" name="email">
+        <input v-model="data.price" type="number" class="form-control" name="price">
       </div>
 
       <button class="btn btn-primary w-50 py-2" type="submit">Сохранить</button>
       <router-link to="/products" class="btn btn-secondary w-50 py-2">Отмена</router-link>
     </form>
-  </main>
+<!--  </main>-->
 </template>
 
 <!--Атрибут scoped означает, что стиль применяется только к текущему компоненту-->
