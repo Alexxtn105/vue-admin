@@ -93,6 +93,7 @@ const del = async (id: number) => {
       <tr v-for="product in products" :key="product.id">
         <td>{{ product.id }}</td>
         <!--Пишем :src, поскольку это переменная-->
+<!--        <td><img :src="product.image" width="50"></td>-->
         <td><img :src="product.image" width="50"></td>
         <td>{{ product.title }}</td>
         <td>{{ product.description }}</td>

@@ -32,11 +32,7 @@ const upload = async (files: FileList | null) => {
 
 //отправляем post-запрос на загрузку собственных изображений
   try {
-    const {data} = await axios.post('upload',
-        {
-//         // image: file   // <- так отправлять нельзя, нужно использовать FormData!!!
-          image: formData // <- так можно
-        });
+    const {data} = await axios.post('upload',formData);
     //тестовый вывод данных
     //const data={
     //  url:"http://localhost:3000/uploads/test.jpg"
