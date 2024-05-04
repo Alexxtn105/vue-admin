@@ -3,6 +3,7 @@
 import {onMounted, reactive, ref} from "vue";
 import axios from "axios";
 import {useRoute, useRouter} from "vue-router";
+import ImageUpload from "@/components/image-upload.vue";
 
 // переменные формы с использование reactive
 const data = reactive({
@@ -28,10 +29,10 @@ const router = useRouter()
 
 // заполняем список ролей
 //onMounted(async () => {
-  //делаем запрос в бэкенд
+//делаем запрос в бэкенд
 //  const {data} = await axios.get('products');
-  //присваиваем полученные данные
- //products.value = data;
+//присваиваем полученные данные
+//products.value = data;
 //});
 
 //функция submit - оправка данных формой в бэкенд
@@ -52,11 +53,10 @@ const submit = async () => {
 }
 
 
-
 </script>
 
 <template>
-<!--  <main class="form-signin w-100 m-auto">-->
+  <main class="form-signin w-100 m-auto">
     <form @submit.prevent="submit">
       <div class="mb-3">
         <label>Название</label>
@@ -67,8 +67,14 @@ const submit = async () => {
         <textarea v-model="data.description" class="form-control" name="description"></textarea>
       </div>
       <div class="mb-3">
+        <!--        <input v-model="data.image" class="form-control" name="image">-->
         <label>Изображение</label>
-        <input v-model="data.image" class="form-control" name="image">
+        <div class="input-group">
+          <input v-model="data.image" class="form-control" name="image">
+          <!--Кнопка открытия файла-->
+          <!-- Реагируем на emit @uploaded. В переменной $event будет url заугрженного файла-->
+          <image-upload @uploaded="data.image = $event"/>
+        </div>
       </div>
       <div class="mb-3">
         <label>Цена</label>
@@ -78,7 +84,7 @@ const submit = async () => {
       <button class="btn btn-primary w-50 py-2" type="submit">Сохранить</button>
       <router-link to="/products" class="btn btn-secondary w-50 py-2">Отмена</router-link>
     </form>
-<!--  </main>-->
+  </main>
 </template>
 
 <!--Атрибут scoped означает, что стиль применяется только к текущему компоненту-->

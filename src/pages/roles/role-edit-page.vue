@@ -6,10 +6,10 @@ import {Permission} from "@/models/Permission";
 
 // Переменная формы с использование reactive
 //  явно указываем типы данных
-let formData: UnwrapNestedRefs<{ permissions: number[]; name: string }>;
-formData = reactive({
+//let formData: UnwrapNestedRefs<{ permissions: number[]; name: string }>;
+const formData = reactive({
   name: '',
-  permissions: [] // этот список меняется
+  permissions: [] as number[] // этот список меняется
 });
 
 const permissionList = ref([]); // это что у нас есть
