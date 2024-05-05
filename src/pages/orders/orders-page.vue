@@ -85,7 +85,9 @@ const select = (id: number) => {
         <tr>
           <td colspan="5">
             <!--Добавляем условие вывода для анимации (будет показан только один выделенный заказ)-->
-            <div v-if="selected===order.id">
+            <!--<div v-if="selected===order.id">-->
+            <!--Тут же применяем стили анимации выпадающего списка вместо v-if. Также нужен класс overflow-hidden, иначе страшные наложения-->
+            <div class="overflow-hidden" :class="selected===order.id ? 'show' : 'hide'">
               <table class="table table-striped table-sm">
                 <thead>
                 <tr>
@@ -119,6 +121,15 @@ const select = (id: number) => {
 
 </template>
 
+<!--Стиль для анимации выпадающего списка позиций-->
 <style scoped>
+.show {
+  max-height: 150px;
+  transition: max-height 300ms ease-in;
+}
 
+.hide {
+  max-height: 0px;
+  transition: max-height 300ms ease-out;
+}
 </style>
