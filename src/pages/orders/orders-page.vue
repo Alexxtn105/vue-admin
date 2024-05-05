@@ -63,24 +63,58 @@ const del = async (id: number) => {
       </tr>
       </thead>
       <tbody>
-      <tr v-for="order in orders" :key="order.id">
-        <td>{{ order.id }}</td>
-        <td>{{ order.name }}</td>
-        <td>{{ order.email }}</td>
-        <td>{{ order.total }}</td>
-        <td>
-          <!--Кнопка Редактировать-->
-          <div class="btn-group mr-2">
-            <router-link :to="`/orders/${order.id}/edit`" class="btn btn-sn btn-outline-secondary">Редактировать
-            </router-link>
-          </div>
-          <!--Кнопка Удалить-->
-          <div class="btn-group mr-2">
-            <a href="javascript:void(0)" class="btn btn-sn btn-outline-secondary" @click="del(order.id)">Удалить</a>
-          </div>
+      <!--Этот template невидимый. Используем его тег для того, чтобы сделать вложенные строки заказанных товаров-->
+      <template v-for="order in orders" :key="order.id">
+        <tr>
+          <td>{{ order.id }}</td>
+          <td>{{ order.name }}</td>
+          <td>{{ order.email }}</td>
+          <td>{{ order.total }}</td>
+          <td>
+            <!--Кнопка Редактировать-->
+<!--            <div class="btn-group mr-2">-->
+<!--              <router-link :to="`/orders/${order.id}/edit`" class="btn btn-sn btn-outline-secondary">Редактировать-->
+<!--              </router-link>-->
+<!--            </div>-->
+            <!--Кнопка Удалить-->
+<!--            <div class="btn-group mr-2">-->
+<!--              <a href="javascript:void(0)" class="btn btn-sn btn-outline-secondary" @click="del(order.id)">Удалить</a>-->
+<!--            </div>-->
+<!--            Кнопка Посмотреть состав заказа-->
+            <div class="btn-group mr-2">
+              <a href="javascript:void(0)" class="btn btn-sn btn-outline-secondary">Посмотреть</a>
+            </div>
 
-        </td>
-      </tr>
+          </td>
+        </tr>
+        <!--Вложенная таблица заказанных позиций-->
+        <tr>
+          <td colspan="5">
+            <div>
+              <table class="table table-striped table-sm">
+                <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Товар</th>
+                  <th scope="col">Количество</th>
+                  <th scope="col">Цена</th>
+                </tr>
+                <tr v-for="item in order.order_items" :key="item.id">
+                  <td>{{ item.id }}</td>
+                  <td>{{ item.product_title }}</td>
+                  <td>{{ item.quantity }}</td>
+                  <td>{{ item.price }}</td>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+
+            </div>
+          </td>
+        </tr>
+      </template>
+
       </tbody>
     </table>
   </div>
