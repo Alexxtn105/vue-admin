@@ -78,7 +78,7 @@ const del = async (id: number) => {
 <template>
   <!--Кнопка Добавить пользователя-->
   <div class="btn-group mr-2">
-    <router-link to="/users/create" class="btn btn-sn btn-outline-secondary">Добавить</router-link>
+    <router-link to="/users/create" class="btn btn-sn btn-outline-primary">Добавить</router-link>
   </div>
 
   <!--  Таблица пользователей-->

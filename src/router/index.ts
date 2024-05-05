@@ -14,7 +14,6 @@ import ProductsPage from "@/pages/products/products-page.vue";
 import ProductsEditPage from "@/pages/products/products-edit-page.vue";
 import ProductsCreatePage from "@/pages/products/products-create-page.vue";
 import OrdersPage from "@/pages/orders/orders-page.vue";
-import OrdersCreatePage from "@/pages/orders/orders-create-page.vue";
 
 const routes: Array<RouteRecordRaw> = [
     {path: '/register', component: RegisterPage},
@@ -34,7 +33,6 @@ const routes: Array<RouteRecordRaw> = [
             {path: '/products/:id/edit', component:ProductsEditPage},
             {path: '/products/create', component:ProductsCreatePage},
             {path: '/orders', component:OrdersPage},
-            {path: '/orders/create', component:OrdersCreatePage},
         ]
     },
 ]

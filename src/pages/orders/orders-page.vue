@@ -2,7 +2,6 @@
 
 import {onMounted, ref} from "vue";
 import axios from "axios";
-import {Order} from "@/models/Order";
 import PaginatorComponent from "@/components/paginator-component.vue";
 
 //для полученных с сервера данных
@@ -35,12 +34,26 @@ const select = (id: number) => {
   selected.value = selected.value !== id ? id : 0;
 }
 
+
+//экспорт списка в CSV
+const exportCSV = async () => {
+  // поскольку мы скачиваем файл, то в конфигурации запроса указываем тип ответа blob:
+  const {data} = await axios.post('export', {}, {responseType: 'blob'});
+  //создаем blob
+  const blob = new Blob([data], {type: 'text/csv'});
+  // для того, чтобы загрузить его, создаем линк (программно генерим гиперссылку):
+  const link = document.createElement('a'); // создаем элемент "a" (anchor)
+  link.href = window.URL.createObjectURL(data);     // создаем гиперссылку
+  link.download = 'orders.csv';                     // это будет имя заугружаемомго файла
+  link.click();                                     // программно нажимаем ссылку
+
+}
 </script>
 
 <template>
   <!--Кнопка Добавить-->
   <div class="btn-group mr-2">
-    <router-link to="/orders/create" class="btn btn-sn btn-outline-secondary">Добавить</router-link>
+    <a href="javascript:void(0)" class="btn btn-sn btn-outline-primary" @click="exportCSV">Экспорт в CSV</a>
   </div>
 
   <!--  Таблица-->
