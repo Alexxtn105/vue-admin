@@ -67,12 +67,12 @@ const submit = async () => {
         <textarea v-model="data.description" class="form-control" name="description"></textarea>
       </div>
       <div class="mb-3">
-        <!--        <input v-model="data.image" class="form-control" name="image">-->
+        <!--<input v-model="data.image" class="form-control" name="image">-->
         <label>Изображение</label>
         <div class="input-group">
           <input v-model="data.image" class="form-control" name="image">
           <!--Кнопка открытия файла-->
-          <!-- Реагируем на emit @uploaded. В переменной $event будет url заугрженного файла-->
+          <!-- Реагируем на emit @uploaded. В переменной $event будет url загруженного файла-->
           <image-upload @uploaded="data.image = $event"/>
         </div>
       </div>

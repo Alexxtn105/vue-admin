@@ -3,6 +3,7 @@
 import {onMounted, reactive, ref} from "vue";
 import axios from "axios";
 import {useRoute, useRouter} from "vue-router";
+import ImageUpload from "@/components/image-upload.vue";
 
 // переменные формы с использование reactive
 const data = reactive({
@@ -20,7 +21,7 @@ const products = ref([]);
 // роутер для редиректа на страницу пользователей
 const router = useRouter()
 
-//получаем параметры с помощью useRoue().
+//получаем параметры с помощью useRoute().
 // Он отличается от useRoutes тем, что используется для получения параметров,
 // а useRouter используется для навигации по страницам
 // полученный route будет содержать необходимый нам id
@@ -67,8 +68,6 @@ const submit = async () => {
   }
 }
 
-
-
 </script>
 
 <template>
@@ -83,12 +82,18 @@ const submit = async () => {
         <input v-model="data.description" class="form-control" name="last_name">
       </div>
       <div class="mb-3">
+        <!--<input v-model="data.image" class="form-control" name="image">-->
         <label>Изображение</label>
-        <input v-model="data.image" class="form-control" name="email">
+        <div class="input-group">
+          <input v-model="data.image" class="form-control" name="image">
+          <!--Кнопка открытия файла-->
+          <!-- Реагируем на emit @uploaded. В переменной $event будет url загруженного файла-->
+          <image-upload @uploaded="data.image = $event"/>
+        </div>
       </div>
       <div class="mb-3">
         <label>Цена</label>
-        <input v-model="data.price" class="form-control" name="email">
+        <input v-model="data.price" type="number" class="form-control" name="email">
       </div>
 
       <button class="btn btn-primary w-50 py-2" type="submit">Сохранить</button>

@@ -26,17 +26,13 @@ const upload = async (files: FileList | null) => {
 
   //alert(file.slice().size)
 
-  // пихаем содержимое файла в объект FormData, котороый в дальнейшем можно использовать в post-запросах
+  // пихаем содержимое файла в объект FormData, который в дальнейшем можно использовать в post-запросах на upload
   const formData = new FormData();
   formData.append("image", file);
 
 //отправляем post-запрос на загрузку собственных изображений
   try {
     const {data} = await axios.post('upload',formData);
-    //тестовый вывод данных
-    //const data={
-    //  url:"http://localhost:3000/uploads/test.jpg"
-    // }
 
     // необходимо оповестить о том, что страница изменилась
     // то есть сделать emit, в параметре отправить url прикрепленного файла
@@ -45,8 +41,6 @@ const upload = async (files: FileList | null) => {
     alert(e);
     return;
   }
-
-
 }
 </script>
 
