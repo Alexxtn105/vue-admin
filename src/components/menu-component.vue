@@ -38,6 +38,13 @@
               Товары
             </router-link>
           </li>
+          <li class="nav-item">
+            <!--Указываем router-link to /roles -->
+            <!--Для подсветки текущего выделенного пункта меню - используем active-class="active" -->
+            <router-link to="/orders" active-class="active" class="nav-link">
+              Заказы
+            </router-link>
+          </li>
         </ul>
       </div>
     </div>
