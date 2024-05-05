@@ -14,6 +14,7 @@ import ProductsPage from "@/pages/products/products-page.vue";
 import ProductsEditPage from "@/pages/products/products-edit-page.vue";
 import ProductsCreatePage from "@/pages/products/products-create-page.vue";
 import OrdersPage from "@/pages/orders/orders-page.vue";
+import ProfilePage from "@/pages/profile-page.vue";
 
 const routes: Array<RouteRecordRaw> = [
     {path: '/register', component: RegisterPage},
@@ -23,6 +24,7 @@ const routes: Array<RouteRecordRaw> = [
         component: wrapperPage,
         children: [
             {path: '/dashboard', component: DashboardPage},
+            {path: '/profile', component:ProfilePage},
             {path: '/users', component: UsersPage},
             {path: '/users/create', component: UserCreatePage},
             {path: '/users/:id/edit', component: UserEditPage},
