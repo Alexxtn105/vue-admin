@@ -6,9 +6,13 @@ import {Order} from "@/models/Order";
 import PaginatorComponent from "@/components/paginator-component.vue";
 
 //для полученных с сервера данных
-const orders = ref([])
+const orders = ref([]);
 // переменные для страничного вывода
 const lastPage = ref(0);
+
+//прикручиваем анимацию для анамации выпадающего списка заказанных позиций
+// в ней будет id заказа, список которого открыт в данный момент
+const selected = ref(0);
 
 const load = async (page = 1) => {
   const {data} = await axios.get(`orders?page=${page}`);
@@ -23,23 +27,12 @@ const load = async (page = 1) => {
 //как только сгенерировался html
 onMounted(load);
 
-// Функция удаления пользователя из таблицы по id
-const del = async (id: number) => {
-  //выводим подтверждение
-  if (confirm('Вы уверены, что желаете удалить заказ?')) {
-    //alert(`products/${id}`)
-    try {
-      // удалаяем пользователя в бэкенде
-      await axios.delete(`orders/${id}`);
-
-      // также обновляем данные во фроненде
-      // предварительно нужно создать структуру user в @/models/order (документ typescript)
-      // фактически, просто применяем фильтр (не равно ИД)
-      orders.value = orders.value.filter((p: Order) => p.id !== id);
-    } catch (e) {
-      alert(e)
-    }
-  }
+// функция анимации выпадающего списка позиций в заказе
+const select = (id: number) => {
+  //текущий выделенный заказ
+  //selected.value = id;// <-если сделать так, то при повторном нажатии на кнопку "посмотреть" список свертываться не будет
+  //можно сделать так:
+  selected.value = selected.value !== id ? id : 0;
 }
 
 </script>
@@ -72,17 +65,18 @@ const del = async (id: number) => {
           <td>{{ order.total }}</td>
           <td>
             <!--Кнопка Редактировать-->
-<!--            <div class="btn-group mr-2">-->
-<!--              <router-link :to="`/orders/${order.id}/edit`" class="btn btn-sn btn-outline-secondary">Редактировать-->
-<!--              </router-link>-->
-<!--            </div>-->
+            <!--            <div class="btn-group mr-2">-->
+            <!--              <router-link :to="`/orders/${order.id}/edit`" class="btn btn-sn btn-outline-secondary">Редактировать-->
+            <!--              </router-link>-->
+            <!--            </div>-->
             <!--Кнопка Удалить-->
-<!--            <div class="btn-group mr-2">-->
-<!--              <a href="javascript:void(0)" class="btn btn-sn btn-outline-secondary" @click="del(order.id)">Удалить</a>-->
-<!--            </div>-->
-<!--            Кнопка Посмотреть состав заказа-->
+            <!--            <div class="btn-group mr-2">-->
+            <!--              <a href="javascript:void(0)" class="btn btn-sn btn-outline-secondary" @click="del(order.id)">Удалить</a>-->
+            <!--            </div>-->
+            <!--            Кнопка Посмотреть состав заказа-->
             <div class="btn-group mr-2">
-              <a href="javascript:void(0)" class="btn btn-sn btn-outline-secondary">Посмотреть</a>
+              <a href="javascript:void(0)" class="btn btn-sn btn-outline-secondary"
+                 @click="select(order.id)">Посмотреть</a>
             </div>
 
           </td>
@@ -90,7 +84,8 @@ const del = async (id: number) => {
         <!--Вложенная таблица заказанных позиций-->
         <tr>
           <td colspan="5">
-            <div>
+            <!--Добавляем условие вывода для анимации (будет показан только один выделенный заказ)-->
+            <div v-if="selected===order.id">
               <table class="table table-striped table-sm">
                 <thead>
                 <tr>
@@ -103,7 +98,7 @@ const del = async (id: number) => {
                   <td>{{ item.id }}</td>
                   <td>{{ item.product_title }}</td>
                   <td>{{ item.quantity }}</td>
-                  <td>{{ item.price }}</td>
+                  <td type="number">{{ item.price }}</td>
                 </tr>
                 </thead>
                 <tbody>
