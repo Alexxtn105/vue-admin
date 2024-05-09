@@ -1,3 +1,53 @@
+<!--если нужно использовать typescript, в теге script указываем атрибут setup lang="ts"-->
+<script setup lang="ts">
+import {onMounted, ref, computed, watch} from "vue";
+import axios from "axios";
+import {useRouter} from "vue-router";
+import {useStore} from "vuex";
+
+const name = ref('')
+const router = useRouter()
+
+//получаем пользователя с использованием механизма vuex (store)
+const  store=useStore();
+const user=computed(()=>store.state.user);
+//обзательно приручиваем наблюдателя за изменение состояния user:
+watch(user, ()=>{
+  name.value=user.value.first_name+' '+user.value.last_name;
+  console.log(user.value);
+});
+
+
+// прежде чем использовать axios, необходимо дождаться,
+// пока отрендерится вся html-страничка,
+// поэтому используем событие onMounted:
+/*
+// Переделал с помощью vuex (см. код выше)
+onMounted(async () => {
+  try {
+    //const {data} = await axios.get('user', {withCredentials: true});
+    const {data} = await axios.get('user'); // конфиг withCredentials: true вынес в дефолты (main.ts)
+
+    //присваиваем величину текущего залогиненного пользователя из полученного json
+    name.value = data.first_name + ' ' + data.last_name;
+    console.log(data)
+  } catch (e) {
+    // !! Редирект на страницу логина в случае ошибки (пользователь не аутентифицирован или что-то еще)
+    await router.push('/login');
+  }
+});
+*/
+
+
+// логаут
+const logout = async () => {
+  // вызываем в бэк-енде функцию логаута
+  await axios.post('logout')
+}
+
+</script>
+
+
 <template>
   <nav class="navbar navbar-dark sticky-top bg-dark flex-nd-nowrap p-0 shadow">
     <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">AlexxTN</a>
@@ -34,47 +84,3 @@
 
   <!--  </header>-->
 </template>
-
-//если нужно использовать typescript, в теге script указываем атрибут setup lang="ts"
-<script lang="ts">
-
-import {onMounted, ref} from "vue";
-import axios from "axios";
-import {useRouter} from "vue-router";
-import router from "@/router";
-
-export default {
-
-  setup() {
-    const name = ref('')
-    const router = useRouter()
-
-    // прежде чем использовать axios, необходимо дождаться,
-    // пока отрендерится вся html-страничка,
-    // поэтому используем событие onMounted:
-    onMounted(async () => {
-      try {
-        //const {data} = await axios.get('user', {withCredentials: true});
-        const {data} = await axios.get('user'); // конфиг withCredentials: true вынес в дефолты (main.ts)
-
-        //присваиваем величину текущего залогиненного пользователя из полученного json
-        name.value = data.first_name + ' ' + data.last_name;
-        console.log(data)
-      } catch (e) {
-        // !! Редирект на страницу логина в случае ошибки (пользователь не аутентифицирован или что-то еще)
-        await router.push('/login');
-      }
-    });
-
-    const logout = async () => {
-      // вызываем в бэк-енде функцию логаута
-      await axios.post('logout')
-    }
-
-    return {
-      name,
-      logout
-    }
-  }
-}
-</script>

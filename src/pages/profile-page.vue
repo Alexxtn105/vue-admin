@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import {reactive, onMounted} from "vue";
+import {reactive, onMounted, computed, watch} from "vue";
 import axios from "axios";
+import {useStore} from "vuex";
 
 const infoData = reactive({
   first_name: '',
@@ -13,7 +14,22 @@ const passwordData = reactive({
   password_confirm: ''
 })
 
+//получаем пользователя с использованием механизма vuex (store)
+const store = useStore();
+const user = computed(() => store.state.user);
+//обзательно приручиваем наблюдателя за изменение состояния user:
+watch(user, () => {
+  //name.value = user.value.first_name + ' ' + user.value.last_name;
+  //console.log(user.value);
 
+  infoData.first_name = user.value.first_name;
+  infoData.last_name = user.value.last_name;
+  infoData.email = user.value.email;
+
+});
+
+//переделал с помощью Vuex (см. код выше)
+/*
 onMounted(async () => {
   try {
     const {data} = await axios.get('user')
@@ -24,12 +40,19 @@ onMounted(async () => {
     alert(e)
   }
 });
+*/
+
 
 // сохранение данных пользователя
 const infoSubmit = async () => {
 //
   try {
-    await axios.put('users/info', infoData);
+    // присваиваем переменной data значение из put-запроса
+    // для корректного обновления данных страницы
+    const {data} = await axios.put('users/info', infoData);
+
+    // пушим через диспатч (для обновления инфы, чтобы не обновлять страницу)
+    await store.dispatch('setUser', data);
   } catch (e) {
     alert(e)
   }
