@@ -16,7 +16,7 @@ const passwordData = reactive({
 
 //получаем пользователя с использованием механизма vuex (store)
 const store = useStore();
-const user = computed(() => store.state.user);
+const user = computed(() => store.state.User.user);
 //обзательно приручиваем наблюдателя за изменение состояния user:
 watch(user, () => {
   //name.value = user.value.first_name + ' ' + user.value.last_name;
@@ -52,7 +52,7 @@ const infoSubmit = async () => {
     const {data} = await axios.put('users/info', infoData);
 
     // пушим через диспатч (для обновления инфы, чтобы не обновлять страницу)
-    await store.dispatch('setUser', data);
+    await store.dispatch('User/setUser', data);
   } catch (e) {
     alert(e)
   }

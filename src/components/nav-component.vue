@@ -10,7 +10,7 @@ const router = useRouter()
 
 //получаем пользователя с использованием механизма vuex (store)
 const  store=useStore();
-const user=computed(()=>store.state.user);
+const user=computed(()=>store.state.User.user);
 //обзательно приручиваем наблюдателя за изменение состояния user:
 watch(user, ()=>{
   name.value=user.value.first_name+' '+user.value.last_name;
