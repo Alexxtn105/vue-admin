@@ -40,7 +40,7 @@ const submit = async () => {
         {
           // !!! Вынес withCredentials в дефолты axios (main.ts),
           // поэтому нижнюю можно закомментить
-          withCredentials: true  // <-- ВНИМАНИЕ!!! Обязательно добавляем параметр withCredentials:true, будут взяты куки из бэкэнда!
+          //withCredentials: true  // <-- ВНИМАНИЕ!!! Обязательно добавляем параметр withCredentials:true, будут взяты куки из бэкэнда!
         }
     );
 
@@ -92,7 +92,10 @@ const submit = async () => {
       <h1 class="h3 mb-3 fw-normal">Вход</h1>
 
       <div class="form-floating">
-        <input v-model="form.email" type="email" class="form-control" placeholder="name@example.com">
+        <input v-model="form.email"
+               type="email"
+               class="form-control"
+               placeholder="name@example.com">
         <label for="floatingInput">Email</label>
       </div>
 
