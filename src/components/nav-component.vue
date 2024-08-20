@@ -11,7 +11,7 @@ const router = useRouter()
 //получаем пользователя с использованием механизма vuex (store)
 const  store=useStore();
 const user=computed(()=>store.state.User.user);
-//обзательно приручиваем наблюдателя за изменение состояния user:
+//обязательно прикручиваем наблюдателя за изменение состояния user:
 watch(user, ()=>{
   name.value=user.value.first_name+' '+user.value.last_name;
   console.log(user.value);
@@ -41,7 +41,7 @@ onMounted(async () => {
 
 // логаут
 const logout = async () => {
-  // вызываем в бэк-енде функцию логаута
+  // вызываем в бэкенде функцию логаута
   await axios.post('logout')
 }
 

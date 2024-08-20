@@ -17,7 +17,7 @@ const passwordData = reactive({
 //получаем пользователя с использованием механизма vuex (store)
 const store = useStore();
 const user = computed(() => store.state.User.user);
-//обзательно приручиваем наблюдателя за изменение состояния user:
+//обязательно прикручиваем наблюдателя за изменение состояния user:
 watch(user, () => {
   //name.value = user.value.first_name + ' ' + user.value.last_name;
   //console.log(user.value);
@@ -58,7 +58,7 @@ const infoSubmit = async () => {
   }
 }
 
-//ихменение пароля
+//изменение пароля
 const passwordSubmit = async () => {
 //
   try {
